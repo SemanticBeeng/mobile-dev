@@ -11,7 +11,7 @@
 
 ---
 
-## 📊 The 20+ Concepts Overview
+## 📊 The 30+ Concepts Overview
 
 | # | Concept | Domain | Difficulty |
 |---|---------|--------|------------|
@@ -41,6 +41,14 @@
 | 24 | [[Feature-Modules]] | Modular | ⭐⭐⭐⭐ Expert |
 | 25 | [[SwiftData-Architecture]] | Data | ⭐⭐⭐ Advanced |
 | 26 | [[MVC]] | Architecture | ⭐ Beginner |
+| 27 | [[Client]] | System | ⭐⭐ Intermediate |
+| 28 | [[Server]] | System | ⭐⭐ Intermediate |
+| 29 | [[Client-Server-Architecture]] | System | ⭐⭐⭐ Advanced |
+| 30 | [[SPA-Single-Page-Application]] | Web | ⭐⭐⭐ Advanced |
+| 31 | [[SSR-Server-Side-Rendering]] | Web | ⭐⭐⭐ Advanced |
+| 32 | [[BFF-Pattern]] | System | ⭐⭐⭐⭐ Expert |
+| 33 | [[Offline-First-Architecture]] | System | ⭐⭐⭐⭐ Expert |
+| 34 | [[MVC-Across-Architectures]] | System | ⭐⭐⭐ Advanced |
 
 ---
 

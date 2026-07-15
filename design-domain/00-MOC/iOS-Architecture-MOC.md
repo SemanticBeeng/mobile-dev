@@ -71,6 +71,18 @@ Scaling codebases with modular architecture.
 - [[Swift-Package-Manager]] - Module management
 - [[Module-Communication]] - Inter-module coordination
 
+### 8. System Architecture
+Understanding distributed systems and client-server patterns.
+
+- [[Client]] - User-facing application component
+- [[Server]] - Backend request handler
+- [[Client-Server-Architecture]] - Distributed app pattern
+- [[SPA-Single-Page-Application]] - Web client architecture
+- [[SSR-Server-Side-Rendering]] - Server-rendered web apps  
+- [[BFF-Pattern]] - Backend for Frontend
+- [[Offline-First-Architecture]] - Network-independent apps
+- [[MVC-Across-Architectures]] - MVC in different contexts
+
 ---
 
 ## 🗺️ Learning Roadmap
@@ -93,6 +105,12 @@ Level 3: Advanced
 ├── [[Clean-Architecture]]
 ├── [[Feature-Modules]]
 └── [[Actors]]
+
+Level 4: System Design
+├── [[Client-Server-Architecture]]
+├── [[BFF-Pattern]]
+├── [[Offline-First-Architecture]]
+└── [[MVC-Across-Architectures]]
 ```
 
 ---

@@ -123,6 +123,10 @@ SwiftUI naturally evolves MVC into MVVM:
 - [[MVVM]] - Evolution for better testability
 - [[VIPER]] - More granular separation
 - [[Coordinator-Pattern]] - Extract navigation
+- [[MVC-Across-Architectures]] - MVC in client-server & web contexts
+
+## See Also
+- [[../code/src/MVC_001/README|MVC_001 Example]] - Working code demo
 
 ## Tags
 #architecture #mvc #uikit #apple #traditional
