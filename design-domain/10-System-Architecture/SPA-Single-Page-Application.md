@@ -15,37 +15,33 @@ A **Single-Page Application (SPA)** is a web app where:
 ```mermaid
 flowchart TB
     subgraph Initial["1️⃣ Initial Load"]
-        Browser1[Browser]
-        CDN[CDN / Server]
-        Bundle[bundle.js<br/>+ index.html]
+        Browser1[Browser] -->|"GET /"| CDN[CDN / Server]
+        CDN -->|"index.html + bundle.js"| Browser1
     end
-    
-    Browser1 -->|GET /| CDN
-    CDN -->|HTML + JS| Browser1
-    Bundle --> Browser1
     
     subgraph Runtime["2️⃣ Runtime"]
-        Browser2[Browser]
-        SPA[SPA Running<br/>React/Vue/Angular]
-        API[API Server]
+        Browser2[Browser] --> SPA[SPA Running]
+        SPA <-->|"fetch() JSON"| API[API Server]
+        SPA -->|DOM updates| Browser2
     end
     
-    Browser2 --> SPA
-    SPA <-->|fetch() JSON| API
-    SPA -->|DOM updates| Browser2
+    Initial --> Runtime
 ```
 
 ## SPA vs Traditional Web
 
 ```mermaid
-flowchart LR
-    subgraph Traditional["Traditional (MPA)"]
+flowchart TB
+    subgraph Traditional["Traditional MPA"]
         T1[Page 1] -->|link click| Server1[Server]
         Server1 -->|full HTML| T2[Page 2]
         T2 -->|link click| Server2[Server]
         Server2 -->|full HTML| T3[Page 3]
     end
-    
+```
+
+```mermaid
+flowchart TB
     subgraph SPA["Single-Page App"]
         S1[App Shell] -->|route change| Router[Client Router]
         Router -->|update DOM| S1
