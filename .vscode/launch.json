@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:mobile-dev}/code/src/MVC_001_CrossUI",
+            "name": "Debug MVC_001_CrossUI (code/src/MVC_001_CrossUI)",
+            "target": "MVC_001_CrossUI",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug MVC_001_CrossUI (code/src/MVC_001_CrossUI)"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:mobile-dev}/code/src/MVC_001_CrossUI",
+            "name": "Release MVC_001_CrossUI (code/src/MVC_001_CrossUI)",
+            "target": "MVC_001_CrossUI",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release MVC_001_CrossUI (code/src/MVC_001_CrossUI)"
+        }
+    ]
+}

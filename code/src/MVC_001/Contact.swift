@@ -1,11 +1,14 @@
 // MARK: - MODEL
 // The Model represents data and business logic.
 // It knows nothing about how it will be displayed.
+//
+// NOTE: For Swift Package projects, use SharedModels package instead.
+// This file exists for standalone Xcode project compatibility.
 
 import Foundation
 
 /// Contact entity - pure data structure
-struct Contact: Identifiable {
+struct Contact: Identifiable, Equatable {
     let id: UUID
     var firstName: String
     var lastName: String
