@@ -49,6 +49,7 @@
 | 32 | [[BFF-Pattern]] | System | ⭐⭐⭐⭐ Expert |
 | 33 | [[Offline-First-Architecture]] | System | ⭐⭐⭐⭐ Expert |
 | 34 | [[MVC-Across-Architectures]] | System | ⭐⭐⭐ Advanced |
+| 35 | [[PureMVC]] | Architecture | ⭐⭐⭐ Advanced |
 
 ---
 

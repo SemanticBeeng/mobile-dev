@@ -124,6 +124,7 @@ SwiftUI naturally evolves MVC into MVVM:
 - [[VIPER]] - More granular separation
 - [[Coordinator-Pattern]] - Extract navigation
 - [[MVC-Across-Architectures]] - MVC in client-server & web contexts
+- [[PureMVC]] - MVC framework with Facade, actors, Notifications, and Multicore support
 
 ## See Also
 - [[../code/src/MVC_001/README|MVC_001 Example]] - Working code demo
