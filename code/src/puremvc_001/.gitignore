@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+build/
+puremvc-kotlin-multicore/build/
+data/*.json
+data/*.tmp
