@@ -25,28 +25,32 @@ abstract class TerminalUserRegistryScreen : UserRegistryScreen {
 
     override fun run() {
         var running = true
-        while (running) {
-            showMenu()
-            when (prompt("Select an option")) {
-                "1" -> dispatch(UserAction.ListUsers)
-                "2" -> dispatch(UserAction.SearchUsers(prompt("Name or email to search")))
-                "3" -> dispatch(UserAction.CreateUser(readDraft()))
-                "4" -> {
-                    val id = prompt("User ID (first 8 characters are enough)")
-                    dispatch(UserAction.UpdateUser(UpdateUserRequest(id, readDraft())))
-                }
-                "5" -> dispatch(UserAction.ToggleUser(UserIdRequest(prompt("User ID to activate/deactivate"))))
-                "6" -> {
-                    val id = prompt("User ID to remove")
-                    if (prompt("Remove this user? [y/N]").equals("y", ignoreCase = true)) {
-                        dispatch(UserAction.RemoveUser(UserIdRequest(id)))
-                    } else {
-                        present(ScreenUpdate(message = "Removal cancelled."))
+        try {
+            while (running) {
+                showMenu()
+                when (prompt("Select an option")) {
+                    "1" -> dispatch(UserAction.ListUsers)
+                    "2" -> dispatch(UserAction.SearchUsers(prompt("Name or email to search")))
+                    "3" -> dispatch(UserAction.CreateUser(readDraft()))
+                    "4" -> {
+                        val id = prompt("User ID (first 8 characters are enough)")
+                        dispatch(UserAction.UpdateUser(UpdateUserRequest(id, readDraft())))
                     }
+                    "5" -> dispatch(UserAction.ToggleUser(UserIdRequest(prompt("User ID to activate/deactivate"))))
+                    "6" -> {
+                        val id = prompt("User ID to remove")
+                        if (prompt("Remove this user? [y/N]").equals("y", ignoreCase = true)) {
+                            dispatch(UserAction.RemoveUser(UserIdRequest(id)))
+                        } else {
+                            present(ScreenUpdate(message = "Removal cancelled."))
+                        }
+                    }
+                    "0" -> running = false
+                    else -> present(ScreenUpdate(message = "Choose an option from 0 to 6.", isError = true))
                 }
-                "0" -> running = false
-                else -> present(ScreenUpdate(message = "Choose an option from 0 to 6.", isError = true))
             }
+        } catch (_: EndOfInput) {
+            running = false
         }
     }
 
@@ -68,6 +72,8 @@ abstract class TerminalUserRegistryScreen : UserRegistryScreen {
         actionHandler?.invoke(action)
     }
 }
+
+private class EndOfInput : RuntimeException()
 
 class KotterUserRegistryScreen : TerminalUserRegistryScreen() {
     override fun prompt(label: String): String {
@@ -111,7 +117,7 @@ class KotterUserRegistryScreen : TerminalUserRegistryScreen() {
 class PlainUserRegistryScreen : TerminalUserRegistryScreen() {
     override fun prompt(label: String): String {
         print("$label> ")
-        return readlnOrNull().orEmpty()
+        return readlnOrNull() ?: throw EndOfInput()
     }
 
     override fun showMenu() {

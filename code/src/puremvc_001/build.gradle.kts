@@ -25,6 +25,10 @@ application {
     applicationDefaultJvmArgs = listOf("--enable-native-access=ALL-UNNAMED")
 }
 
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 dependencies {
     implementation(project(":puremvc-kotlin-multicore"))
     implementation("com.varabyte.kotter:kotter-jvm:1.4.0")
