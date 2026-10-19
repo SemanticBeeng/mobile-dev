@@ -1,6 +1,7 @@
 package dev.puremvc.users.data
 
 import dev.puremvc.users.domain.User
+import dev.puremvc.users.domain.UserRegistryRules
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.nio.file.AtomicMoveNotSupportedException
@@ -28,7 +29,7 @@ class JsonUserRepository(path: Path) : UserRepository {
                 "Unsupported user registry schema version: ${document.schemaVersion}."
             }
             val users = document.users.map { it.toDomain() }
-            validateUnique(users)
+            UserRegistryRules.requireUnique(users)
             users
         } catch (error: Exception) {
             if (error is UserRegistryReadException) throw error
@@ -41,7 +42,7 @@ class JsonUserRepository(path: Path) : UserRepository {
     }
 
     override fun save(users: List<User>) {
-        validateUnique(users)
+        UserRegistryRules.requireUnique(users)
         val parent = file.parent ?: error("The user registry path must have a parent directory.")
         Files.createDirectories(parent)
 
@@ -60,11 +61,6 @@ class JsonUserRepository(path: Path) : UserRepository {
         } finally {
             Files.deleteIfExists(temporaryFile)
         }
-    }
-
-    private fun validateUnique(users: List<User>) {
-        require(users.map(User::id).toSet().size == users.size) { "Registry contains duplicate user IDs." }
-        require(users.map(User::email).toSet().size == users.size) { "Registry contains duplicate email addresses." }
     }
 
     private fun UserRecord.toDomain() = User(

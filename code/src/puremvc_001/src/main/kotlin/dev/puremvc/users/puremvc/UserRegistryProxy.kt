@@ -4,6 +4,7 @@ import dev.puremvc.users.data.UserRepository
 import dev.puremvc.users.domain.User
 import dev.puremvc.users.domain.UserDraft
 import dev.puremvc.users.domain.UserFactory
+import dev.puremvc.users.domain.UserRegistryRules
 import java.util.UUID
 import org.puremvc.kotlin.multicore.patterns.proxy.Proxy
 
@@ -30,8 +31,9 @@ class UserRegistryProxy(private val repository: UserRepository) : Proxy(NAME) {
     fun create(draft: UserDraft): User {
         val current = currentUsers()
         val user = UserFactory.create(UUID.randomUUID().toString(), draft)
-        ensureEmailAvailable(user.email, current)
-        persist(current + user)
+        val updated = current + user
+        UserRegistryRules.requireUnique(updated)
+        persist(updated)
         return user
     }
 
@@ -39,8 +41,9 @@ class UserRegistryProxy(private val repository: UserRepository) : Proxy(NAME) {
         val current = currentUsers()
         val existing = findByIdPrefix(idPrefix, current)
         val updated = UserFactory.update(existing, draft)
-        ensureEmailAvailable(updated.email, current, existing.id)
-        persist(current.map { if (it.id == existing.id) updated else it })
+        val updatedUsers = current.map { if (it.id == existing.id) updated else it }
+        UserRegistryRules.requireUnique(updatedUsers)
+        persist(updatedUsers)
         return updated
     }
 
@@ -80,12 +83,6 @@ class UserRegistryProxy(private val repository: UserRepository) : Proxy(NAME) {
         repository.save(updated)
         users = updated
         loaded = true
-    }
-
-    private fun ensureEmailAvailable(email: String, current: List<User>, exceptId: String? = null) {
-        require(current.none { it.email == email && it.id != exceptId }) {
-            "A user with that email address already exists."
-        }
     }
 
     private fun findByIdPrefix(idPrefix: String, current: List<User>): User {

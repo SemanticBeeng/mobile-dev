@@ -4,3 +4,6 @@ build/
 puremvc-kotlin-multicore/build/
 data/*.json
 data/*.tmp
+
+../../../java_pid52543.hprof
+*.hbprof

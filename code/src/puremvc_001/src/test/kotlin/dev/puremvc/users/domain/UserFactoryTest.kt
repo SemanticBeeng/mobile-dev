@@ -23,4 +23,17 @@ class UserFactoryTest {
             UserFactory.create("user-1", UserDraft("Ada", "Lovelace", "not-an-email"))
         }
     }
+
+    @Test
+    fun `update preserves identity status and creation time`() {
+        val original = UserFactory.create("user-1", UserDraft("Ada", "Lovelace", "ada@example.test"))
+            .copy(isActive = false)
+
+        val updated = UserFactory.update(original, UserDraft("Augusta", "King", "augusta@example.test"))
+
+        assertEquals(original.id, updated.id)
+        assertEquals(original.isActive, updated.isActive)
+        assertEquals(original.createdAt, updated.createdAt)
+        assertEquals("Augusta King", updated.fullName)
+    }
 }
